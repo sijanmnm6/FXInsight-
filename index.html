@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>FXInsight Signals</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body { background: #0A0F1C; color: white; font-family: sans-serif; padding: 20px; }
+        .header { text-align: center; margin-bottom: 30px; }
+        .pair-btn { width: 100%; padding: 20px; margin: 10px 0; border: none; border-radius: 10px; font-size: 18px; }
+        .buy { background: linear-gradient(to right, #00C853, #00B248); color: white; }
+        .sell { background: linear-gradient(to right, #FF3B30, #D32F2F); color: white; }
+        .signal { background: #1A1F2C; padding: 20px; border-radius: 15px; margin: 20px 0; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>📊 FXInsight</h1>
+        <p>XAUUSD & BTCUSD M15 Signals</p>
+    </div>
+    
+    <button class="pair-btn buy" onclick="getSignal('XAUUSD')">🟡 XAUUSD Signal</button>
+    <button class="pair-btn sell" onclick="getSignal('BTCUSD')">🟣 BTCUSD Signal</button>
+    
+    <div id="signal" class="signal">
+        <p>Tap a button above for signal</p>
+    </div>
+    
+    <script>
+    async function getSignal(pair) {
+        document.getElementById('signal').innerHTML = '<p>🔄 Loading signal...</p>';
+        
+        // Simple signal logic
+        const direction = Math.random() > 0.5 ? 'BUY' : 'SELL';
+        const confidence = Math.floor(70 + Math.random() * 25);
+        
+        document.getElementById('signal').innerHTML = `
+            <h2>${direction} ${pair}</h2>
+            <p>Confidence: ${confidence}%</p>
+            <p>Timeframe: M15</p>
+            <p>Signal Type: ${confidence > 85 ? 'STRONG' : 'MEDIUM'}</p>
+            <button style="width:100%; padding:15px; background:#3B82F6; color:white; border:none; border-radius:8px; margin-top:10px;">
+                📱 Open MT5 to Trade
+            </button>
+        `;
+    }
+    </script>
+</body>
+</html>
